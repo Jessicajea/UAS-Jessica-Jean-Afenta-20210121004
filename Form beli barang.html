@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UAS - Form Beli Barang</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    p {
+      margin: 0;
+    }
+    .keterangan {
+      display: inline-flex;
+      width: 150px;
+    }
+    .input {
+      width: 100px;
+    }
+    .input.number{
+      text-align: right;
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <form id="hitung-harga" method="POST" required>
+    <label for="namaBarang">
+      <p class="keterangan">Nama Barang</p>
+      <span>:</span>
+      <select class="input" name="namaBarang" id="namaBarang" required>
+        <option value="" selected disabled>Pilih Barang</option>
+        <option value="50000">USB</option>
+        <option value="600000">Monitor</option>
+        <option value="400000">Speaker</option>
+      </select>
+    </label>
+    <br/>
+    <label for="jumlah">
+      <p class="keterangan">Jumlah</p>
+      <span>:</span>
+      <input class="input" type="number" name="jumlah" max="10" min="0" id="jumlah" required>
+    </label>
+    <br/>
+    <br/>
+    <input id="hitung" type="submit" value="Hitung">
+    <input id="reset" type="reset" value="Reset">
+    <br/>
+    <label for="harga">
+      <p class="keterangan">Harga</p>
+      <span>:</span>
+      <input class="input number" type="text" name="harga" id="harga" disabled>
+    </label>
+    <br/>
+    <label for="total">
+      <p class="keterangan">Total</p>
+      <span>:</span>
+      <input class="input number" type="text" name="total" id="total" disabled>
+    </label>
+    <br/>
+  </form>
+
+  <script>
+    function $(el) {
+      return document.querySelector(el);
+    }
+
+    function formatter(number) {
+      let value = new Intl.NumberFormat(undefined, {style: 'currency', currency: 'IDR'}).format(number);
+      return value;
+    }
+
+    const form = $('#hitung-harga');
+    const hitung = $('#hitung');
+
+    function hitungHarga(e) {
+      e.preventDefault();
+
+      let namaBarang = $('#namaBarang').value || 0;
+      let jumlah = $('#jumlah').value || 0;
+
+      let total = namaBarang * jumlah;
+
+      $('#harga').value = formatter(namaBarang);
+      $('#total').value = formatter(total);
+    }
+
+    form.addEventListener('submit', hitungHarga, true);
+    hitung.addEventListener('click', hitungHarga, true);
+  </script>
+</body>
+</html>
