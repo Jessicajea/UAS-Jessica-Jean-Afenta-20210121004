@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAS - Form Penjualan Barang</title>
+</head>
+<style>
+    .label{
+        display: inline-flex;
+        width: auto;
+    }
+    .input {
+        width: auto;
+    }
+</style>
+<body>
+    <label for="namaBarang">
+        <p class="label">Nama Barang</p>
+        <span>:</span>
+        <input type="text" id="namaBarang">        
+    </label><br>
+    <label for="hargaBarang">
+        <p class="label">Harga Barang</p>
+        <span>:</span>
+        <input type="text" id="hargaBarang">        
+    </label><br>
+    <label for="jumlahBarang">
+        <p class="label">Jumlah Barang</p>
+        <span>:</span>
+        <input type="number" id="jumlahBarang">        
+    </label><br>
+    <hr class="line">
+    <label for="total">
+        <p class="label">Total</p>
+        <span>:</span>
+        <textarea name="total" id="total"></textarea>        
+    </label><br>
+    <label for="dis">
+        <p class="label">Diskon</p>
+        <span>:</span>
+        <textarea name="dis" id="dis"></textarea>        
+    </label><br>
+    <label for="bayar">
+        <p class="label">Bayar</p>
+        <span>:</span>
+        <textarea name="bayar" id="bayar"></textarea>        
+    </label><br>
+    <button onclick="hasil()">Proses</button>
+    <button>reset</button>
+    <script>
+        function hasil() {
+    var hargaBarang=parseInt(document.getElementById('hargaBarang').value);
+    var jumlahBarang=parseInt(document.getElementById("jumlahBarang").value);
+    var total = hargaBarang*jumlahBarang;
+    document.getElementById("total").innerHTML=total;
+    var dis = 0.10;
+    var bayar;
+    if (total>100000){
+        bayar = total - (total*dis);
+        document.getElementById("bayar").innerHTML = bayar;
+        document.getElementById("dis").innerHTML = "10%";
+    } else {
+        document.getElementById("bayar").innerHTML = total;
+        document.getElementById("dis").innerHTML = "0%"
+    }
+}
+    </script>
+</body>
+</html>
